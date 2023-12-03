@@ -4,7 +4,7 @@
   "type": "module",
   "description": "aoc_2023",
   "main": "runner.ts",
-  "rootDir": "day_1",
+  "rootDir": "day_2",
   "scripts": {
     "test": "echo 'no test'",
     "build": "tsc",
@@ -18,7 +18,7 @@
   "author": "HurdyGutty",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.10.1",
+    "@types/node": "^20.10.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.2"
   }
