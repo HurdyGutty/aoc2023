@@ -38,8 +38,6 @@ function relatedNumber(row: number, i: number, numbers: relatedNumber[]): relate
         number = lines[row][k].concat(number);
     }
 
-    console.log(number);
-
     return {
         number: number,
         row: row,
@@ -83,7 +81,6 @@ for (let row = 0; row < lines.length; row++){
            }
            if (numbers.length >= 2){
             sum += parseInt(numbers[0].number) * parseInt(numbers[1].number);
-            console.log(numbers);
             }
             numbers = [];
         }

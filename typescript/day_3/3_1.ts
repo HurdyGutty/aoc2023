@@ -31,17 +31,13 @@ for (let row = 0; row < lines.length; row++){
                 flag = true;
             }
             
-            if (row > 0){
-                if (isSpecial(lines[row - 1][i - 1]) || isSpecial(lines[row - 1][i]) || isSpecial(lines[row - 1][i + 1])){
+            if (row > 0 && (isSpecial(lines[row - 1][i - 1]) || isSpecial(lines[row - 1][i]) || isSpecial(lines[row - 1][i + 1]))){
                     flag = true;
-                }
             }
-            if (row < lines.length - 1){
-                if (isSpecial(lines[row + 1][i - 1]) || isSpecial(lines[row + 1][i]) || isSpecial(lines[row + 1][i + 1])){
-                    flag = true;
-                }
+            if ((row < lines.length - 1) && 
+                    (isSpecial(lines[row + 1][i - 1]) || isSpecial(lines[row + 1][i]) || isSpecial(lines[row + 1][i + 1]))){
+                        flag = true;
             }
-            console.log(row, number, flag);
         } else {
                 if (flag === true){
                     sum_row += number;
