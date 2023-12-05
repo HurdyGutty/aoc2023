@@ -1,22 +1,18 @@
-import { executionAsyncId } from "node:async_hooks";
 import { parseInput, readInput } from "./text.js";
 
 let input = await readInput();
 let lines: string[][] = parseInput(input).map(line => line.substring(input.indexOf(':') + 2).split(' | '));
 
-console.log(lines);
 let sum = 0;
 
-function isSpace(char: string): boolean {
+export function isSpace(char: string): boolean {
     return char.charCodeAt(0) === 32;
 }
 
-for (let line of lines) {
+export function calculatePoints(winning: string, having: string): number {
     let points = 0;
-    let [winning, having] = line;
     let winning_set = new Set<number>();
     let number = 0;
-
     for (let i = 0; i < winning.length; i++) {
         if (isSpace(winning[i])) {
             if (number > 0) winning_set.add(number);
@@ -47,6 +43,15 @@ for (let line of lines) {
             }
         }
     }
+    return points;
+}
+
+
+for (let line of lines) {
+    let points = 0;
+    let [winning, having] = line;
+    points = calculatePoints(winning, having);
+    
     if (points > 0) {
         sum += Math.pow(2, points - 1);
     }
