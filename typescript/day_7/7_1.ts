@@ -20,7 +20,7 @@ let suit = {
     1: "High card",
 }
 
-export function type(hand: string): number {
+function type(hand: string): number {
     let countPerCard: Map<string, number> = new Map();
     countPerCard.set(hand[0], 1);
 
@@ -57,7 +57,7 @@ export function type(hand: string): number {
     return 1;
 }
 
-type HandWithType = {
+export type HandWithType = {
     hand: string,
     bid: number,
     type: number,
@@ -66,12 +66,9 @@ type HandWithType = {
 let addType: HandWithType[] = data.map(d => ({hand: d.hand, bid: d.bid, type: type(d.hand)}));
 
 
-function isNumber(char: string): boolean {
+export function isNumber(char: string): boolean {
     return char.charCodeAt(0) >= 48 && char.charCodeAt(0) <= 57;
 }
-
-
-
 
 function compareCard(card1: string, card2: string): number {
     let card1_value = card1.charCodeAt(0);
@@ -107,9 +104,11 @@ function compareCard(card1: string, card2: string): number {
         
     } 
 
-}
+};
 
-export function compareHand(hand1: string, hand2: string): number {
+export type CompareCard = (card1: string, card2: string) => number;
+
+export function compareHand(hand1: string, hand2: string, compareCard: CompareCard): number {
     for (let i = 0; i < hand1.length; i++) {
         if (compareCard(hand1[i], hand2[i]) !== 0) {
             return compareCard(hand1[i], hand2[i]);
@@ -117,8 +116,9 @@ export function compareHand(hand1: string, hand2: string): number {
     }
     return 0;
 }
+type compareHand = typeof compareHand;
 
-export function sortHand(addType: HandWithType[]): HandWithType[] {
+export function sortHand(addType: HandWithType[], compareFn: compareHand, compareCard: CompareCard): HandWithType[] {
     return addType.sort((a, b) => {
         if (a.type > b.type) {
             return 1;
@@ -126,11 +126,11 @@ export function sortHand(addType: HandWithType[]): HandWithType[] {
         if (a.type < b.type) {
             return -1;
         }
-        return compareHand(a.hand, b.hand);
+        return compareFn(a.hand, b.hand, compareCard);
     });
 }
 
-let sorted = sortHand(addType);
+let sorted = sortHand(addType, compareHand, compareCard);
 
 console.log(sorted);
 
