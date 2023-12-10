@@ -3,7 +3,7 @@ import { parseInput, readInput } from "./text.js";
 let input = await readInput();
 let lines: string[] = parseInput(input);
 
-function isAlpha(c: string): boolean {
+export function isAlpha(c: string): boolean {
     let charCode = c.charCodeAt(0);
     return (charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123);
 }
@@ -44,7 +44,7 @@ function parseNode(lines: string[], parseLine: ParseLineFn): [string, string[][]
 
 }
 
-let [directions, nodes] = parseNode(lines, parseLine);
+export let [directions, nodes] = parseNode(lines, parseLine);
 
 
 function buildTreeFromNodes(nodes: string[][]): Tree {
@@ -65,11 +65,12 @@ function buildTreeFromNodes(nodes: string[][]): Tree {
     return tree;
 }
 
-let tree = buildTreeFromNodes(nodes);
+export let tree = buildTreeFromNodes(nodes);
+
 let first = tree['AAA'];
 let numberOfTurns = 0;
 
-function getDirection(direction: string, turn: number): string {
+export function getDirection(direction: string, turn: number): string {
     return direction[turn % direction.length];
 }
 
@@ -86,5 +87,6 @@ while (first.value !== 'ZZZ') {
     }
 }
 
+console.log(numberOfTurns);
 
 
