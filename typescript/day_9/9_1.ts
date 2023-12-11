@@ -5,7 +5,6 @@ let lines: string[] = parseInput(input);
 
 let histories = lines.map(line => line.split(' ').map(word => parseInt(word)));
 
-console.log(histories);
 
 let sum = 0;
 for (let i = 0; i < histories.length; i++) {
