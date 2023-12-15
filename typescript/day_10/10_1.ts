@@ -136,4 +136,4 @@ let result = findMainLoop(lines)?.length;
 if (result) result /= 2;
 
 
-console.log(mainLoop);
+console.log(result);
