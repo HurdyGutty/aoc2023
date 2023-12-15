@@ -24,7 +24,6 @@ mainLoop.forEach((position) => {
     new_map[position.y][position.x] = 'X';
 });
 
-console.log(new_map);
 type PipeType = '.' | '|' | '-' | 'L' | 'J' | '7' | 'F';
 
 type PipeConvert = {
@@ -54,7 +53,7 @@ let doubleGridMap = new_map.map((line, i, map) => line.map((value, j) => {
     }));
 
 
-let finishMap = [];
+let finishMap: string[] = [];
 
 finishMap = doubleGridMap.map((line, i, map) => {
     let first_line = '';
