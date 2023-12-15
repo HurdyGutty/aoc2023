@@ -1,12 +1,12 @@
 import { parseInput, readInput } from "./text.js";
 
 let input = await readInput();
-let lines: string[] = parseInput(input);
+export let lines: string[] = parseInput(input);
 
 // console.log(lines);
 
-type Pipe = '|' | '-' | 'L' | 'J' | '7' | 'F' | 'S';
-let direction = {
+export type Pipe = '|' | '-' | 'L' | 'J' | '7' | 'F' | 'S';
+export let direction = {
     '|': [{x: 0, y: -1}, {x: 0, y: 1}],
     '-': [{x: 1, y: 0}, {x: -1, y: 0}],
     'L': [{x: 0, y: -1}, {x: 1, y: 0}],
@@ -16,7 +16,7 @@ let direction = {
     'S': [{x: 0, y: 1}, {x: 1, y: 0}, {x: 0, y: -1}, {x: -1, y: 0}]
 }
 
-let SPosition = {x: 0, y: 0};
+export let SPosition = {x: 0, y: 0};
 
 for (let i = 0; i < lines.length; i++) {
     for (let j = 0; j < lines[i].length; j++) {
@@ -28,7 +28,7 @@ for (let i = 0; i < lines.length; i++) {
 }
 
 
-type Position = {x: number, y: number};
+export type Position = {x: number, y: number};
 
 export let mainLoop: Position[] = [];
 
@@ -59,29 +59,6 @@ export function goodConnection (current: Position, next: Position): boolean {
     return false;
 
 }
-
-// function traverse(current: Position, previous: Position, visited: boolean[][], mainLoop: Position[]): Position[] | undefined {
-//     if (lines[current.y][current.x] === 'S' && visited[current.y][current.x]) {
-//         return mainLoop;
-//     }
-//     if (visited[current.y][current.x]) {
-//         return;
-//     }
-//     mainLoop.push(current);
-//     visited[current.y][current.x] = true;
-//     let directions = direction[lines[current.y][current.x] as Pipe];
-//     for (let dir of directions) {
-//         let previous_dir = {x: previous.x - current.x, y: previous.y - current.y};
-//         if (dir.x === previous_dir.x && dir.y === previous_dir.y) continue;
-//         let next: Position = {x: current.x + dir.x, y: current.y + dir.y};
-//         if (goodConnection(current, next)) {
-//             let loop = traverse(next, current, visited, mainLoop);
-//             if (loop) return loop;
-//         }
-//     }
-
-//     mainLoop.pop();
-// }
 
 function traverse(start: Position, visited: boolean[][], mainLoop: Position[]): Position[] | undefined {
     let value = lines[start.y][start.x];
